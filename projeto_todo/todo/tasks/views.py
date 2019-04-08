@@ -25,6 +25,21 @@ def newTask(request):
         form = TaskForm()
         return render(request, 'tasks/addtask.html', {'form': form})
 
+def editTask(request, id):
+    task = get_object_or_404(Task, pk=id)
+    form = TaskForm(instance=task)
+
+    if(request.method == 'POST'):
+        form = TaskForm(request.POST, instance=task)
+
+        if(form.is_valid()):
+            task.save()
+            return redirect('/')
+        else:
+            return render(reuquest, 'task/edittask.html', {'form': form, 'task': task})
+    else:
+        return render(request, 'tasks/edittask.html', {'form': form, 'task': task})
+
 def helloWorld(request):
     return HttpResponse('Hello World!')
 
