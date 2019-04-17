@@ -108,3 +108,12 @@ footer p {
     position: relative;
 }
 
+/* Messages */
+
+ul.messages {
+    padding: 0;
+}
+
+ul.messages li {
+    list-style: none;
+}

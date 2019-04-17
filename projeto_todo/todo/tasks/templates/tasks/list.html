@@ -14,11 +14,18 @@
         <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da tarefa para buscar...">
         <i class="fas fa-search"></i>
     </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <ul class="task-list">
         {% for task in tasks %}
         <li class="task-item">
             <span><a href="/task/{{task.id}}">{{task.title}}</a></span>
-            <span><i class="fas fa-trash"></i></span>
+            <a href="delete/{{task.id}}"><span><i class="fas fa-trash"></i></span></a>
             <a href="edit/{{task.id}}"><span><i class="fas fa-edit"></i></span></a>
         </li>
         {% endfor %}
