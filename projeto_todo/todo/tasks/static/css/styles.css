@@ -2,6 +2,10 @@
     padding: 0;
 }
 
+.container-fluid .row {
+    margin: 0;
+}
+
 /* Navbar */
 
 .navbar  {
@@ -139,4 +143,9 @@ ul.messages li {
 
 .auth-card {
     margin-bottom: 30px;
+}
+
+.change-form-p {
+    margin-top: 30px;
+    text-align: center;
 }
