@@ -83,6 +83,10 @@
     border-bottom: 1px dashed #CCC;
 }
 
+.task-item.done {
+    background-color: #CCC;
+}  
+
 .fas.fa-trash {
     color: #db1e47;
     cursor: pointer;
@@ -97,6 +101,18 @@
     margin: 5px;
     font-size: 20px;
     float: right;
+}
+
+.fa-check {
+    color: #CCC;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 20px;
+    float: right;
+}
+
+.done .fa-check {
+    color: #3476e2;
 }
 
 /* Rodapé */
