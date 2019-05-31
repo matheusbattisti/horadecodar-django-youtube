@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from .forms import TaskForm
 from django.contrib import messages
+import datetime
 
 from .models import Task
 
@@ -12,6 +13,9 @@ def taskList(request):
     
     search = request.GET.get('search')
     filter = request.GET.get('filter')
+    tasksDoneRecently = Task.objects.filter(done='done', updated_at__lte=datetime.datetime.today(), updated_at__gt=datetime.datetime.today()-datetime.timedelta(days=30)).count()
+    tasksDone = Task.objects.filter(done='done', user=request.user).count()
+    tasksDoing = Task.objects.filter(done='doing', user=request.user).count()
 
     if search:
         tasks = Task.objects.filter(title__icontains=search, user=request.user)
@@ -25,7 +29,8 @@ def taskList(request):
         page = request.GET.get('page')
         tasks = paginator.get_page(page)
 
-    return render(request, 'tasks/list.html', {'tasks':tasks})
+    return render(request, 'tasks/list.html', 
+        {'tasks':tasks, 'tasksrecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing })
 
 @login_required
 def taskView(request, id):
