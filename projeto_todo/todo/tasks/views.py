@@ -13,7 +13,7 @@ def taskList(request):
     
     search = request.GET.get('search')
     filter = request.GET.get('filter')
-    tasksDoneRecently = Task.objects.filter(done='done', updated_at__lte=datetime.datetime.today(), updated_at__gt=datetime.datetime.today()-datetime.timedelta(days=30)).count()
+    tasksDoneRecently = Task.objects.filter(done='done', updated_at__gt=datetime.datetime.now()-datetime.timedelta(days=30)).count()
     tasksDone = Task.objects.filter(done='done', user=request.user).count()
     tasksDoing = Task.objects.filter(done='doing', user=request.user).count()
 
